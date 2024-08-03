@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumerableToolkit", "Enumer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumerableToolkit.Async", "EnumerableToolkit.Async\EnumerableToolkit.Async.csproj", "{20F2E511-5F31-46A3-B123-483CB56CB517}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumerableToolkit.Builder.Async", "EnumerableToolkit.Builder.Async\EnumerableToolkit.Builder.Async.csproj", "{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{20F2E511-5F31-46A3-B123-483CB56CB517}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20F2E511-5F31-46A3-B123-483CB56CB517}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20F2E511-5F31-46A3-B123-483CB56CB517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

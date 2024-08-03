@@ -1,24 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <DefaultNamespace>EnumerableToolkit.Builder</DefaultNamespace>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>$(AssemblyTitle)</Title>
     <Authors>Banane9</Authors>
     <Version>1.0.0</Version>
-    <Description>Adds an EnumerableBuilder to incrementally construct an enumerable sequence out of building blocks.</Description>
+    <Description>Adds an AsyncEnumerableBuilder to incrementally construct an async enumerable sequence out of building blocks.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/Banane9/EnumerableToolkit</PackageProjectUrl>
     <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
     <!--<PackageIconUrl></PackageIconUrl>
     <PackageIconUrl>/Icon.png</PackageIconUrl>-->
-    <PackageTags>IEnumerable; enumerable; tool; tools; toolkit; builder; helper; linq</PackageTags>
+    <PackageTags>IAsyncEnumerable; enumerable; tool; tools; toolkit; builder; helper; linq; async</PackageTags>
   </PropertyGroup>
-  
+
   <ItemGroup>
-    <None Include="README.md" Pack="True" PackagePath="" />
+    <None Include="README.md" />
     <!--<None Include="..\Icon.png" Pack="true" PackagePath="" /> -->
   </ItemGroup>
-  
+
   <ItemGroup>
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EnumerableToolkit.Async\EnumerableToolkit.Async.csproj" />
     <ProjectReference Include="..\EnumerableToolkit\EnumerableToolkit.csproj" />
   </ItemGroup>
 </Project>

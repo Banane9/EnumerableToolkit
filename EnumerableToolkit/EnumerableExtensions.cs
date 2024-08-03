@@ -31,12 +31,12 @@ namespace EnumerableToolkit
         }
 
         /// <summary>
-        /// Appends a single item to a sequence.
+        /// Concatenates a single item to a sequence.
         /// </summary>
         /// <typeparam name="T">The type of elements in the sequence.</typeparam>
         /// <param name="source">The input sequence.</param>
         /// <param name="item">The item to append.</param>
-        /// <returns>The sequence with an appended item.</returns>
+        /// <returns>The sequence with the concatenated item.</returns>
         public static IEnumerable<T> Concat<T>(this IEnumerable<T> source, T item)
         {
             foreach (var sourceItem in source)
