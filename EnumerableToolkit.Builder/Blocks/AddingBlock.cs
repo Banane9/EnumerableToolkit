@@ -17,7 +17,7 @@
         /// <param name="sequence">A sequence of items that should be added.</param>
         protected AddingBlock(IEnumerable<T> sequence)
         {
-            this.sequence = sequence;
+            this.sequence = sequence ?? throw new ArgumentNullException(nameof(sequence));
         }
     }
 }

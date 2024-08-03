@@ -8,7 +8,7 @@ namespace EnumerableToolkit.Builder
     /// sequence incrementally out of <see cref="BuildingBlock{T}">building blocks</see>.
     /// </summary>
     /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
-    public sealed class EnumerableBuilder<T> : IEnumerable<T>
+    public sealed class EnumerableBuilder<T>
     {
         private readonly List<BuildingBlock<T>> _buildingBlocks = [];
 
@@ -49,10 +49,5 @@ namespace EnumerableToolkit.Builder
 
             return current;
         }
-
-        /// <inheritdoc/>
-        public IEnumerator<T> GetEnumerator() => GetEnumerable().GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

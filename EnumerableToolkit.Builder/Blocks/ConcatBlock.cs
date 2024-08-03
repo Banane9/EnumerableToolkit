@@ -7,6 +7,10 @@
     /// <inheritdoc/>
     public sealed class ConcatBlock<T> : AddingBlock<T>
     {
+        /// <summary>
+        /// Creates a new building block that concatenates the given <paramref name="sequence"/>
+        /// to the end of the current constructed enumerable sequence.
+        /// </summary>
         /// <inheritdoc/>
         public ConcatBlock(IEnumerable<T> sequence) : base(sequence)
         { }
