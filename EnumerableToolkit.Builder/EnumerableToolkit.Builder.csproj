@@ -3,14 +3,14 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>$(AssemblyTitle)</Title>
     <Authors>Banane9</Authors>
-    <Version>0.1.0-beta</Version>
+    <Version>1.0.0</Version>
     <Description>A convenience and extendability focused mod loader using NuGet packages.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/Banane9/EnumerableToolkit</PackageProjectUrl>
     <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
-    <!--<PackageIconUrl>https://raw.githubusercontent.com/MonkeyModdingTroop/MonkeyLoader/master/Icon.png</PackageIconUrl>
+    <!--<PackageIconUrl></PackageIconUrl>
     <PackageIconUrl>/Icon.png</PackageIconUrl>-->
-    <PackageTags>ienumerable; enumerable; tool; tools; toolkit; builder; helper</PackageTags>
+    <PackageTags>IEnumerable; enumerable; tool; tools; toolkit; builder; helper; linq</PackageTags>
   </PropertyGroup>
   
   <ItemGroup>

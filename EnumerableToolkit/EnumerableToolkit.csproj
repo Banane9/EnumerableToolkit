@@ -3,14 +3,14 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>$(AssemblyTitle)</Title>
     <Authors>Banane9</Authors>
-    <Version>0.1.0-beta</Version>
-    <Description>Contains helpful convenience methods to work with enumerables.</Description>
+    <Version>1.0.0</Version>
+    <Description>Contains helpful convenience methods to work with enumerables and some more specific types.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/Banane9/EnumerableToolkit</PackageProjectUrl>
     <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
-    <!--<PackageIconUrl>https://raw.githubusercontent.com/MonkeyModdingTroop/MonkeyLoader/master/Icon.png</PackageIconUrl>
+    <!--<PackageIconUrl></PackageIconUrl>
     <PackageIconUrl>/Icon.png</PackageIconUrl>-->
-    <PackageTags>ienumerable; enumerable; tool; tools; toolkit; builder; helper</PackageTags>
+    <PackageTags>IEnumerable; enumerable; tool; tools; toolkit; builder; helper; linq</PackageTags>
   </PropertyGroup>
   
   <ItemGroup>
