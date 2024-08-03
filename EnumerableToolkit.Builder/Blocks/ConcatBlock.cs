@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EnumerableToolkit.Builder.Blocks
+﻿namespace EnumerableToolkit.Builder.Blocks
 {
     /// <summary>
     /// Represents a building block of the <see cref="EnumerableBuilder{T}"/>
