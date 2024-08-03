@@ -14,7 +14,7 @@ namespace EnumerableToolkit
     public delegate bool TryConverter<in TInput, TOutput>(TInput input, [NotNullWhen(true)] out TOutput? output);
 
     /// <summary>
-    /// Contains handy extension methods for <see cref="IEnumerable{T}"/>.
+    /// Contains general extension methods for <see cref="IEnumerable{T}">enumerable</see> sequences.
     /// </summary>
     public static class EnumerableExtensions
     {
@@ -46,92 +46,13 @@ namespace EnumerableToolkit
         }
 
         /// <summary>
-        /// Outputs all nodes that are part of cycles, given an expression that produces a set of connected nodes.
-        /// </summary>
-        /// <param name="nodes">The input nodes.</param>
-        /// <param name="identifier">Gets the dependency identifier of a node.</param>
-        /// <param name="connected">The expression producing connected nodes.</param>
-        /// <typeparam name="TNode">The node type.</typeparam>
-        /// <typeparam name="TDependency">The dependency connection type.</typeparam>
-        /// <returns>All input nodes that are part of a cycle.</returns>
-        public static IEnumerable<TNode> FindCycles<TNode, TDependency>(this IEnumerable<TNode> nodes, Func<TNode, TDependency> identifier, Func<TNode, IEnumerable<TDependency>> connected)
-            where TNode : notnull
-            where TDependency : notnull
-        {
-            var currentPath = new Stack<TNode>();
-            var visited = new HashSet<TNode>();
-            var dependencies = nodes.ToDictionary(node => node, node => new HashSet<TDependency>(connected(node)));
-
-            while (dependencies.Count > 0)
-            {
-                var key = dependencies.FirstOrDefault(x => x.Value.Count == 0).Key
-                    ?? throw new ArgumentException($"Cyclic dependencies are not allowed!{Environment.NewLine}" +
-                    $"Sorted: {string.Join(", ", nodes.Select(identifier).Except(dependencies.Keys.Select(identifier)))}{Environment.NewLine}" +
-                    $"Unsorted:{Environment.NewLine}" +
-                    $"    {string.Join($"{Environment.NewLine}    ", dependencies.Select(element => $"{identifier(element.Key)}:{Environment.NewLine}        {string.Join($"{Environment.NewLine}        ", element.Value)}"))}");
-
-                dependencies.Remove(key);
-
-                var id = identifier(key);
-                foreach (var updateElement in dependencies)
-                    updateElement.Value.Remove(id);
-
-                yield return key;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get a value for the given key from this dictionary.<br/>
-        /// If the key is not defined, a new instance of <typeparamref name="TValue"/>
-        /// will be created using the <paramref name="valueFactory"/>, before being added to the dictionary.
-        /// </summary>
-        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
-        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-        /// <param name="dictionary">The dictionary to get a value out of.</param>
-        /// <param name="key">The key to get a value for.</param>
-        /// <param name="valueFactory">A factory method that creates a value when there is none yet.</param>
-        /// <returns>The value from the dictionary or the newly created and added one.</returns>
-        public static TValue GetOrCreateValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, Func<TValue> valueFactory)
-        {
-            if (dictionary.TryGetValue(key, out var value))
-                return value;
-
-            value = valueFactory();
-            dictionary.Add(key, value);
-
-            return value;
-        }
-
-        /// <summary>
-        /// Tries to get a value for the given key from this dictionary.<br/>
-        /// If the key is not defined, a new instance of <typeparamref name="TValue"/>
-        /// will be created using the default constructor, before being added to the dictionary.
-        /// </summary>
-        /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
-        /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-        /// <param name="dictionary">The dictionary to get a value out of.</param>
-        /// <param name="key">The key to get a value for.</param>
-        /// <returns>The value from the dictionary or the newly created and added one.</returns>
-        public static TValue GetOrCreateValue<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
-            where TValue : new()
-        {
-            if (dictionary.TryGetValue(key, out var value))
-                return value;
-
-            value = new TValue();
-            dictionary.Add(key, value);
-
-            return value;
-        }
-
-        /// <summary>
         /// Filters a source sequence of <see cref="Type"/>s to only contain the ones instantiable
         /// without parameters and assignable to <typeparamref name="TInstance"/>.
         /// </summary>
         /// <typeparam name="TInstance">The type that sequence items must be assignable to.</typeparam>
         /// <param name="types">The source sequence of types to filter.</param>
         /// <returns>A sequence of instantiable types assignable to <typeparamref name="TInstance"/>.</returns>
-        public static IEnumerable<Type> Instantiable<TInstance>(this IEnumerable<Type> types)
+        public static IEnumerable<Type> ParameterlessInstantiable<TInstance>(this IEnumerable<Type> types)
         {
             var instanceType = typeof(TInstance);
 
@@ -160,51 +81,6 @@ namespace EnumerableToolkit
                     yield return toItem;
             }
         }
-
-        /// <summary>
-        /// Performs a topological sort of the input <paramref name="nodes"/>, given an expression that produces a set of connected nodes.
-        /// </summary>
-        /// <param name="nodes">The input nodes.</param>
-        /// <param name="identifier">Gets the dependency identifier of a node.</param>
-        /// <param name="connected">The expression producing connected nodes.</param>
-        /// <typeparam name="TNode">The node type.</typeparam>
-        /// <typeparam name="TDependency">The dependency connection type.</typeparam>
-        /// <returns>The input nodes, sorted .</returns>
-        /// <exception cref="ArgumentException">Thrown if a cyclic dependency is found.</exception>
-        public static IEnumerable<TNode> TopologicalSort<TNode, TDependency>(this IEnumerable<TNode> nodes, Func<TNode, TDependency> identifier, Func<TNode, IEnumerable<TDependency>> connected)
-            where TNode : notnull
-            where TDependency : notnull
-        {
-            var elements = nodes.ToDictionary(node => node, node => new HashSet<TDependency>(connected(node)));
-
-            while (elements.Count > 0)
-            {
-                var key = elements.FirstOrDefault(x => x.Value.Count == 0).Key
-                    ?? throw new ArgumentException($"Cyclic dependencies are not allowed!{Environment.NewLine}" +
-                    $"Sorted: {string.Join(", ", nodes.Select(identifier).Except(elements.Keys.Select(identifier)))}{Environment.NewLine}" +
-                    $"Unsorted:{Environment.NewLine}" +
-                    $"    {string.Join($"{Environment.NewLine}    ", elements.Select(element => $"{identifier(element.Key)}:{Environment.NewLine}        {string.Join($"{Environment.NewLine}        ", element.Value)}"))}");
-
-                elements.Remove(key);
-
-                var id = identifier(key);
-                foreach (var updateElement in elements)
-                    updateElement.Value.Remove(id);
-
-                yield return key;
-            }
-        }
-
-        /// <summary>
-        /// Performs a topological sort of the input <paramref name="nodes"/>, given an expression that produces a set of connected nodes.
-        /// </summary>
-        /// <param name="nodes">The input nodes.</param>
-        /// <param name="connected">The expression producing connected nodes.</param>
-        /// <typeparam name="TNode">The node type.</typeparam>
-        /// <returns>The input nodes, sorted.</returns>
-        /// <exception cref="ArgumentException">Thrown if a cyclic dependency is found.</exception>
-        public static IEnumerable<TNode> TopologicalSort<TNode>(this IEnumerable<TNode> nodes, Func<TNode, IEnumerable<TNode>> connected)
-            where TNode : notnull => nodes.TopologicalSort(node => node, connected);
 
         /// <summary>
         /// Tries to transform each item in the <paramref name="source"/> sequence using the <paramref name="trySelector"/>.
