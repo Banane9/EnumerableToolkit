@@ -22,25 +22,31 @@ namespace EnumerableToolkit.Builder
         public int Count { get; }
 
         /// <summary>
-        /// Adds the given <see cref="IBuildingBlock{T}">building block</see>
+        /// Adds the given <see cref="IBuildingBlock{T}">parametrized building block</see>
         /// at the end of the application chain of this enumerable builder.
         /// </summary>
-        /// <param name="block">The building block to add.</param>
+        /// <param name="block">The parametrized building block to add.</param>
         public void AddBuildingBlock(IParametrizedBuildingBlock<T, TParameters> block);
 
         /// <summary>
-        /// Adds the given <see cref="IBuildingBlock{T}">building blocks</see>
+        /// Adds the given <see cref="IBuildingBlock{T}">parametrized building blocks</see>
         /// at the end of the application chain of this enumerable builder.
         /// </summary>
-        /// <param name="blocks">The building blocks to add.</param>
+        /// <param name="blocks">The parametrized building blocks to add.</param>
         public void AddBuildingBlocks(IEnumerable<IParametrizedBuildingBlock<T, TParameters>> blocks);
 
         /// <summary>
-        /// Adds the given <see cref="IBuildingBlock{T}">building blocks</see>
+        /// Adds the given <see cref="IBuildingBlock{T}">parametrized building blocks</see>
         /// at the end of the application chain of this enumerable builder.
         /// </summary>
-        /// <param name="blocks">The building blocks to add.</param>
+        /// <param name="blocks">The parametrized building blocks to add.</param>
         public void AddBuildingBlocks(params IParametrizedBuildingBlock<T, TParameters>[] blocks);
+
+        /// <summary>
+        /// Removes all <see cref="IParametrizedBuildingBlock{T, TParameters}">parametrized building blocks</see>
+        /// from the application chain of this enumerable builder.
+        /// </summary>
+        public void ClearBuildingBlocks();
 
         /// <summary>
         /// Gets the currently constructed sequence of this enumerable builder
@@ -49,6 +55,14 @@ namespace EnumerableToolkit.Builder
         /// <param name="parameters">The parameters to generate a sequence with.</param>
         /// <returns>The constructed enumerable sequence.</returns>
         public IEnumerable<T> GetEnumerable(TParameters parameters);
+
+        /// <summary>
+        /// Removes the first instance of the given <see cref="IParametrizedBuildingBlock{T, TParameters}">parametrized building block</see>
+        /// from the application chain of this enumerable builder.
+        /// </summary>
+        /// <param name="block">The parametrized building block to remove.</param>
+        /// <returns><c>true</c> if a building block was removed; otherwise, <c>false</c>.</returns>
+        public bool RemoveBuildingBlock(IParametrizedBuildingBlock<T, TParameters> block);
     }
 
     /// <summary>
@@ -78,6 +92,9 @@ namespace EnumerableToolkit.Builder
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
+        public void ClearBuildingBlocks() => _buildingBlocks.Clear();
+
+        /// <inheritdoc/>
         public IEnumerable<T> GetEnumerable(TParameters parameters)
         {
             var current = Enumerable.Empty<T>();
@@ -89,5 +106,9 @@ namespace EnumerableToolkit.Builder
 
             return current;
         }
+
+        /// <inheritdoc/>
+        public bool RemoveBuildingBlock(IParametrizedBuildingBlock<T, TParameters> block)
+            => _buildingBlocks.Remove(block);
     }
 }

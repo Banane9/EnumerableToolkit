@@ -29,6 +29,9 @@ namespace EnumerableToolkit.Builder
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
+        public void ClearBuildingBlocks() => _buildingBlocks.Clear();
+
+        /// <inheritdoc/>
         public IAsyncEnumerable<T> GetEnumerable(TParameters parameters)
         {
             var current = AsyncEnumerable.Empty<T>();
@@ -40,6 +43,10 @@ namespace EnumerableToolkit.Builder
 
             return current;
         }
+
+        /// <inheritdoc/>
+        public bool RemoveBuildingBlock(IAsyncParametrizedBuildingBlock<T, TParameters> block)
+            => _buildingBlocks.Remove(block);
     }
 
     /// <summary>
@@ -59,25 +66,31 @@ namespace EnumerableToolkit.Builder
         public int Count { get; }
 
         /// <summary>
-        /// Adds the given <see cref="IAsyncBuildingBlock{T}">async building block</see>
+        /// Adds the given <see cref="IAsyncBuildingBlock{T}">async parametrized building block</see>
         /// at the end of the application chain of this async enumerable builder.
         /// </summary>
-        /// <param name="block">The async building block to add.</param>
+        /// <param name="block">The async parametrized building block to add.</param>
         public void AddBuildingBlock(IAsyncParametrizedBuildingBlock<T, TParameters> block);
 
         /// <summary>
-        /// Adds the given <see cref="IAsyncBuildingBlock{T}">async building blocks</see>
+        /// Adds the given <see cref="IAsyncBuildingBlock{T}">async parametrized building blocks</see>
         /// at the end of the application chain of this async enumerable builder.
         /// </summary>
-        /// <param name="blocks">The async building blocks to add.</param>
+        /// <param name="blocks">The async parametrized building blocks to add.</param>
         public void AddBuildingBlocks(IEnumerable<IAsyncParametrizedBuildingBlock<T, TParameters>> blocks);
 
         /// <summary>
-        /// Adds the given <see cref="IAsyncBuildingBlock{T}">async building blocks</see>
+        /// Adds the given <see cref="IAsyncBuildingBlock{T}">async parametrized building blocks</see>
         /// at the end of the application chain of this async enumerable builder.
         /// </summary>
-        /// <param name="blocks">The async building blocks to add.</param>
+        /// <param name="blocks">The async parametrized building blocks to add.</param>
         public void AddBuildingBlocks(params IAsyncParametrizedBuildingBlock<T, TParameters>[] blocks);
+
+        /// <summary>
+        /// Removes all <see cref="IAsyncParametrizedBuildingBlock{T, TParameters}">async parametrized building blocks</see>
+        /// from the application chain of this async enumerable builder.
+        /// </summary>
+        public void ClearBuildingBlocks();
 
         /// <summary>
         /// Gets the currently constructed async sequence of this async enumerable builder
@@ -86,5 +99,13 @@ namespace EnumerableToolkit.Builder
         /// <param name="parameters">The parameters to generate an async sequence with.</param>
         /// <returns>The constructed async enumerable sequence.</returns>
         public IAsyncEnumerable<T> GetEnumerable(TParameters parameters);
+
+        /// <summary>
+        /// Removes the first instance of the given <see cref="IAsyncParametrizedBuildingBlock{T, TParameters}">async parametrized building block</see>
+        /// from the application chain of this async enumerable builder.
+        /// </summary>
+        /// <param name="block">The async parametrized building block to remove.</param>
+        /// <returns><c>true</c> if a building block was removed; otherwise, <c>false</c>.</returns>
+        public bool RemoveBuildingBlock(IAsyncParametrizedBuildingBlock<T, TParameters> block);
     }
 }

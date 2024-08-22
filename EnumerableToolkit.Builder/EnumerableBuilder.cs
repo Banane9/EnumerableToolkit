@@ -27,6 +27,9 @@ namespace EnumerableToolkit.Builder
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
+        public void ClearBuildingBlocks() => _buildingBlocks.Clear();
+
+        /// <inheritdoc/>
         public IEnumerable<T> GetEnumerable()
         {
             var current = Enumerable.Empty<T>();
@@ -38,6 +41,10 @@ namespace EnumerableToolkit.Builder
 
             return current;
         }
+
+        /// <inheritdoc/>
+        public bool RemoveBuildingBlock(IBuildingBlock<T> block)
+            => _buildingBlocks.Remove(block);
     }
 
     /// <summary>
@@ -76,9 +83,23 @@ namespace EnumerableToolkit.Builder
         public void AddBuildingBlocks(params IBuildingBlock<T>[] blocks);
 
         /// <summary>
+        /// Removes all <see cref="IBuildingBlock{T}">building blocks</see>
+        /// from the application chain of this enumerable builder.
+        /// </summary>
+        public void ClearBuildingBlocks();
+
+        /// <summary>
         /// Constructs the currently constructed sequence of this enumerable builder.
         /// </summary>
         /// <returns>The constructed enumerable sequence.</returns>
         public IEnumerable<T> GetEnumerable();
+
+        /// <summary>
+        /// Removes the first instance of the given <see cref="IBuildingBlock{T}">building block</see>
+        /// from the application chain of this enumerable builder.
+        /// </summary>
+        /// <param name="block">The building block to remove.</param>
+        /// <returns><c>true</c> if a building block was removed; otherwise, <c>false</c>.</returns>
+        public bool RemoveBuildingBlock(IBuildingBlock<T> block);
     }
 }
