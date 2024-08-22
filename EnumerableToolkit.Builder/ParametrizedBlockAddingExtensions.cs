@@ -3,8 +3,8 @@
 namespace EnumerableToolkit.Builder
 {
     /// <summary>
-    /// Contains extension methods for the <see cref="IEnumerableBuilder{T}"/>
-    /// that make it easy to add the predefined <see cref="BuildingBlock{T}">building blocks</see>.
+    /// Contains extension methods for the <see cref="IParametrizedEnumerableBuilder{T, TParameters}"/>
+    /// that make it easy to add the predefined <see cref="IBuildingBlock{T}">building blocks</see>.
     /// </summary>
     public static class ParametrizedBlockAddingExtensions
     {
@@ -240,7 +240,7 @@ namespace EnumerableToolkit.Builder
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <typeparam name="TParameters">The type of the parameters for generating a sequence.</typeparam>
         /// <param name="block">The basic building block to cast to a parametrized one.</param>
-        /// <returns></returns>
+        /// <returns>The casted <paramref name="block"/>.</returns>
         public static IParametrizedBuildingBlock<T, TParameters> ToParametrized<T, TParameters>(this IBuildingBlock<T> block)
             => (IParametrizedBuildingBlock<T, TParameters>)(IParametrizedBuildingBlock<T, object>)block;
 

@@ -8,41 +8,43 @@ namespace EnumerableToolkit.Builder
     /// <summary>
     /// Defines the interface for enumerable builders that
     /// allow constructing an <see cref="IEnumerable{T}">enumerable</see>
-    /// sequence incrementally out of <see cref="BuildingBlock{T}">building blocks</see>.
+    /// sequence incrementally out of <see cref="BuildingBlock{T}">building blocks</see>
+    /// while using parameter object to control generation.
     /// </summary>
     /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
     /// <typeparam name="TParameters">The type of the parameters for generating a sequence.</typeparam>
     public interface IParametrizedEnumerableBuilder<T, TParameters>
     {
         /// <summary>
-        /// Gets the number of <see cref="BuildingBlock{T}">building blocks</see>
+        /// Gets the number of <see cref="IBuildingBlock{T}">building blocks</see>
         /// that have been added to this enumerable builder.
         /// </summary>
         public int Count { get; }
 
         /// <summary>
-        /// Adds the given <see cref="BuildingBlock{T}">building block</see>
+        /// Adds the given <see cref="IBuildingBlock{T}">building block</see>
         /// at the end of the application chain of this enumerable builder.
         /// </summary>
         /// <param name="block">The building block to add.</param>
         public void AddBuildingBlock(IParametrizedBuildingBlock<T, TParameters> block);
 
         /// <summary>
-        /// Adds the given <see cref="BuildingBlock{T}">building blocks</see>
+        /// Adds the given <see cref="IBuildingBlock{T}">building blocks</see>
         /// at the end of the application chain of this enumerable builder.
         /// </summary>
         /// <param name="blocks">The building blocks to add.</param>
         public void AddBuildingBlocks(IEnumerable<IParametrizedBuildingBlock<T, TParameters>> blocks);
 
         /// <summary>
-        /// Adds the given <see cref="BuildingBlock{T}">building blocks</see>
+        /// Adds the given <see cref="IBuildingBlock{T}">building blocks</see>
         /// at the end of the application chain of this enumerable builder.
         /// </summary>
         /// <param name="blocks">The building blocks to add.</param>
         public void AddBuildingBlocks(params IParametrizedBuildingBlock<T, TParameters>[] blocks);
 
         /// <summary>
-        /// Constructs the currently constructed sequence of this enumerable builder.
+        /// Gets the currently constructed sequence of this enumerable builder
+        /// while using parameter object to control generation.
         /// </summary>
         /// <param name="parameters">The parameters to generate a sequence with.</param>
         /// <returns>The constructed enumerable sequence.</returns>
@@ -51,7 +53,8 @@ namespace EnumerableToolkit.Builder
 
     /// <summary>
     /// Allows constructing an <see cref="IEnumerable{T}">enumerable</see> sequence incrementally
-    /// out of <see cref="IParametrizedBuildingBlock{T, TParameters}">building blocks</see>.
+    /// out of <see cref="IParametrizedBuildingBlock{T, TParameters}">building blocks</see>
+    /// while using parameter object to control generation.
     /// </summary>
     /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
     /// <typeparam name="TParameters">The type of the parameters for generating a sequence.</typeparam>
