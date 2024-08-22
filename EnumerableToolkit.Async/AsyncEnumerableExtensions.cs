@@ -6,7 +6,7 @@ namespace EnumerableToolkit
     /// <summary>
     /// Contains general extension methods for <see cref="IAsyncEnumerable{T}">async enumerable</see> sequences.
     /// </summary>
-    public static class EnumerableExtensions
+    public static class AsyncEnumerableExtensions
     {
         /// <summary>
         /// Concatenates a single item to a sequence.
@@ -32,22 +32,6 @@ namespace EnumerableToolkit
         /// <returns>The sequence with the concatenated sequence.</returns>
         public static IAsyncEnumerable<T> Concat<T>(this IAsyncEnumerable<T> source, IEnumerable<T> sequence)
             => source.Concat(sequence.ToAsyncEnumerable());
-
-        /// <summary>
-        /// Tries to cast every item from the <paramref name="source"/> to <typeparamref name="TTo"/>.
-        /// </summary>
-        /// <typeparam name="TFrom">The items in the source sequence.</typeparam>
-        /// <typeparam name="TTo">The items in the result sequence.</typeparam>
-        /// <param name="source">The items to try and cast.</param>
-        /// <returns>All items from the source that were castable to <typeparamref name="TTo"/> and not <c>null</c>.</returns>
-        public static async IAsyncEnumerable<TTo> SelectWhereCastable<TFrom, TTo>(this IAsyncEnumerable<TFrom?> source)
-        {
-            await foreach (var item in source)
-            {
-                if (item is TTo toItem)
-                    yield return toItem;
-            }
-        }
 
         /// <summary>
         /// Tries to transform each item in the <paramref name="source"/> sequence using the <paramref name="trySelector"/>.

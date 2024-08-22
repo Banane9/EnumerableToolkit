@@ -67,22 +67,6 @@ namespace EnumerableToolkit
         }
 
         /// <summary>
-        /// Tries to cast every item from the <paramref name="source"/> to <typeparamref name="TTo"/>.
-        /// </summary>
-        /// <typeparam name="TFrom">The items in the source sequence.</typeparam>
-        /// <typeparam name="TTo">The items in the result sequence.</typeparam>
-        /// <param name="source">The items to try and cast.</param>
-        /// <returns>All items from the source that were castable to <typeparamref name="TTo"/> and not <c>null</c>.</returns>
-        public static IEnumerable<TTo> SelectWhereCastable<TFrom, TTo>(this IEnumerable<TFrom?> source)
-        {
-            foreach (var item in source)
-            {
-                if (item is TTo toItem)
-                    yield return toItem;
-            }
-        }
-
-        /// <summary>
         /// Tries to transform each item in the <paramref name="source"/> sequence using the <paramref name="trySelector"/>.
         /// </summary>
         /// <typeparam name="TSource">The type of items in the source sequence.</typeparam>
