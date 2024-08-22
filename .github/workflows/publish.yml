@@ -69,10 +69,33 @@ jobs:
         with:
           dotnet-version: 8.x
       
-      # Publish all NuGet packages to the NuGet feed
+      # Publish all NuGet packages to the GitHub feed
       # Use --skip-duplicate to prevent errors if a package with the same version already exists.
       # If you retry a failed workflow, already published packages will be skipped without error.
-      - name: Publish NuGet Packages
+      - name: Publish NuGet Packages (GitHub)
+        run: |
+          foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
+              dotnet nuget push $file --api-key "${{ secrets.GITHUB_TOKEN }}" --source https://nuget.pkg.github.com/Banane9/index.json --skip-duplicate
+          }
+
+  Publish-NuGet:
+    #if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - name: Download NuGet Packages Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: NuGet Packages
+          path: ${{ env.NuGetDirectory }}
+
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+          
+      # Publish all NuGet packages to the NuGet feed
+      - name: Publish NuGet Packages (NuGet)
         run: |
           foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
               dotnet nuget push $file --api-key "${{ secrets.NUGET_KEY }}" --skip-duplicate
