@@ -3,18 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumerableToolkit.Builder", "EnumerableToolkit.Builder\EnumerableToolkit.Builder.csproj", "{332DFE9B-4E4B-4FB3-83B5-5FC923F0B572}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumerableToolkit.Builder", "EnumerableToolkit.Builder\EnumerableToolkit.Builder.csproj", "{332DFE9B-4E4B-4FB3-83B5-5FC923F0B572}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5C6DBB92-7E98-4D41-B8DF-540417285AD4}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumerableToolkit", "EnumerableToolkit\EnumerableToolkit.csproj", "{2939AEC1-C2C2-4E98-8D50-5AA82773794A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumerableToolkit", "EnumerableToolkit\EnumerableToolkit.csproj", "{2939AEC1-C2C2-4E98-8D50-5AA82773794A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumerableToolkit.Async", "EnumerableToolkit.Async\EnumerableToolkit.Async.csproj", "{20F2E511-5F31-46A3-B123-483CB56CB517}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumerableToolkit.Async", "EnumerableToolkit.Async\EnumerableToolkit.Async.csproj", "{20F2E511-5F31-46A3-B123-483CB56CB517}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumerableToolkit.Builder.Async", "EnumerableToolkit.Builder.Async\EnumerableToolkit.Builder.Async.csproj", "{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnumerableToolkit.Builder.Async", "EnumerableToolkit.Builder.Async\EnumerableToolkit.Builder.Async.csproj", "{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumerableToolkit.Tests", "EnumerableToolkit.Tests\EnumerableToolkit.Tests.csproj", "{0516AF95-0995-4C80-8F81-A5600D21D4D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +40,10 @@ Global
 		{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1050D20-FA62-47BA-A235-9A1E8BD62DDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0516AF95-0995-4C80-8F81-A5600D21D4D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0516AF95-0995-4C80-8F81-A5600D21D4D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0516AF95-0995-4C80-8F81-A5600D21D4D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0516AF95-0995-4C80-8F81-A5600D21D4D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

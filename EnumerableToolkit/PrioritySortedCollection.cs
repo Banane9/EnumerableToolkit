@@ -9,13 +9,13 @@
     /// </remarks>
     /// <inheritdoc/>
     public class PrioritySortedCollection<T> : SortedCollection<T>
-        where T : notnull, IPrioritizable
+        where T : class, IPrioritizable
     {
         /// <summary>
         /// Constructs an empty sorted collection using the items' <see cref="IPrioritizable.Priority"/> for sorting.
         /// </summary>
         public PrioritySortedCollection()
-            : base((IComparer<T>)Prioritizable.Comparer)
+            : base(Prioritizable.Comparer)
         { }
 
         /// <summary>
@@ -24,7 +24,7 @@
         /// </summary>
         /// <param name="collection">The elements to add to the collection.</param>
         public PrioritySortedCollection(IEnumerable<T>? collection)
-            : base(collection, (IComparer<T>)Prioritizable.Comparer)
+            : base(collection, Prioritizable.Comparer)
         { }
     }
 }

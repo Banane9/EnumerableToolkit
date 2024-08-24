@@ -68,15 +68,15 @@
     /// Wraps any item to make it <see cref="IPrioritizable">prioritizable</see>.
     /// </summary>
     /// <typeparam name="T">The type of the item to make prioritizable.</typeparam>
-    public readonly struct Prioritizable<T> : IPrioritizable
+    public sealed class Prioritizable<T> : IPrioritizable
     {
         /// <inheritdoc/>
-        public readonly int Priority { get; }
+        public int Priority { get; }
 
         /// <summary>
         /// Gets the wrapped value.
         /// </summary>
-        public readonly T Value { get; }
+        public T Value { get; }
 
         /// <summary>
         /// Wraps the given value to make it <see cref="IPrioritizable">prioritizable</see>
