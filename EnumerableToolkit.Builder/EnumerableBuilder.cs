@@ -9,21 +9,21 @@ namespace EnumerableToolkit.Builder
     /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
     public sealed class EnumerableBuilder<T> : IEnumerableBuilder<T>
     {
-        private readonly List<IBuildingBlock<T>> _buildingBlocks = [];
+        private readonly PrioritySortedCollection<Prioritizable<IBuildingBlock<T>>> _buildingBlocks = [];
 
         /// <inheritdoc/>
         public int Count => _buildingBlocks.Count;
 
         /// <inheritdoc/>
-        public void AddBuildingBlock(IBuildingBlock<T> block)
+        public void AddBuildingBlock(Prioritizable<IBuildingBlock<T>> block)
             => _buildingBlocks.Add(block);
 
         /// <inheritdoc/>
-        public void AddBuildingBlocks(IEnumerable<IBuildingBlock<T>> blocks)
+        public void AddBuildingBlocks(params Prioritizable<IBuildingBlock<T>>[] blocks)
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
-        public void AddBuildingBlocks(params IBuildingBlock<T>[] blocks)
+        public void AddBuildingBlocks(IEnumerable<Prioritizable<IBuildingBlock<T>>> blocks)
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
@@ -36,14 +36,14 @@ namespace EnumerableToolkit.Builder
 
             // Manual iteration rather than .Aggregate to capture
             // the internal state at call time instead of iteration time
-            foreach (var block in _buildingBlocks)
+            foreach (var block in _buildingBlocks.Unwrap())
                 block.Apply(current);
 
             return current;
         }
 
         /// <inheritdoc/>
-        public bool RemoveBuildingBlock(IBuildingBlock<T> block)
+        public bool RemoveBuildingBlock(Prioritizable<IBuildingBlock<T>> block)
             => _buildingBlocks.Remove(block);
     }
 
@@ -63,24 +63,24 @@ namespace EnumerableToolkit.Builder
 
         /// <summary>
         /// Adds the given <see cref="IBuildingBlock{T}">building block</see>
-        /// at the end of the application chain of this enumerable builder.
+        /// into the prioritized application chain of this enumerable builder.
         /// </summary>
         /// <param name="block">The building block to add.</param>
-        public void AddBuildingBlock(IBuildingBlock<T> block);
+        public void AddBuildingBlock(Prioritizable<IBuildingBlock<T>> block);
 
         /// <summary>
         /// Adds the given <see cref="IBuildingBlock{T}">building blocks</see>
-        /// at the end of the application chain of this enumerable builder.
+        /// into the prioritized application chain of this enumerable builder.
         /// </summary>
         /// <param name="blocks">The building blocks to add.</param>
-        public void AddBuildingBlocks(IEnumerable<IBuildingBlock<T>> blocks);
+        public void AddBuildingBlocks(IEnumerable<Prioritizable<IBuildingBlock<T>>> blocks);
 
         /// <summary>
         /// Adds the given <see cref="IBuildingBlock{T}">building blocks</see>
-        /// at the end of the application chain of this enumerable builder.
+        /// into the prioritized application chain of this enumerable builder.
         /// </summary>
         /// <param name="blocks">The building blocks to add.</param>
-        public void AddBuildingBlocks(params IBuildingBlock<T>[] blocks);
+        public void AddBuildingBlocks(params Prioritizable<IBuildingBlock<T>>[] blocks);
 
         /// <summary>
         /// Removes all <see cref="IBuildingBlock{T}">building blocks</see>
@@ -100,6 +100,6 @@ namespace EnumerableToolkit.Builder
         /// </summary>
         /// <param name="block">The building block to remove.</param>
         /// <returns><c>true</c> if a building block was removed; otherwise, <c>false</c>.</returns>
-        public bool RemoveBuildingBlock(IBuildingBlock<T> block);
+        public bool RemoveBuildingBlock(Prioritizable<IBuildingBlock<T>> block);
     }
 }

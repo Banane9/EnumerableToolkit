@@ -28,7 +28,7 @@ namespace EnumerableToolkit.Builder
         /// <param name="sequence">The sequence to concatenate.</param>
         public static IParametrizedEnumerableBuilder<T, TParameters> Concat<T, TParameters>(this IParametrizedEnumerableBuilder<T, TParameters> builder, IEnumerable<T> sequence)
         {
-            builder.AddBuildingBlock(new ConcatBlock<T>(sequence).ToParametrized<T, TParameters>());
+            builder.AddBuildingBlock(new(new ConcatBlock<T>(sequence).ToParametrized<T, TParameters>()));
 
             return builder;
         }
@@ -55,7 +55,7 @@ namespace EnumerableToolkit.Builder
         /// <param name="sequence">A sequence of items that should be added.</param>
         public static IParametrizedEnumerableBuilder<T, TParameters> InsertAfterEveryItem<T, TParameters>(this IParametrizedEnumerableBuilder<T, TParameters> builder, Func<T, int, bool> predicate, IEnumerable<T> sequence)
         {
-            builder.AddBuildingBlock(new InsertAfterEveryItemLambdaBlock<T>(predicate, sequence).ToParametrized<T, TParameters>());
+            builder.AddBuildingBlock(new(new InsertAfterEveryItemLambdaBlock<T>(predicate, sequence).ToParametrized<T, TParameters>()));
 
             return builder;
         }
@@ -105,7 +105,7 @@ namespace EnumerableToolkit.Builder
         /// <param name="sequence">A sequence of items that should be added.</param>
         public static IParametrizedEnumerableBuilder<T, TParameters> InsertAfterFirstItem<T, TParameters>(this IParametrizedEnumerableBuilder<T, TParameters> builder, Func<T, int, bool> predicate, IEnumerable<T> sequence)
         {
-            builder.AddBuildingBlock(new InsertAfterFirstItemLambdaBlock<T>(predicate, sequence).ToParametrized<T, TParameters>());
+            builder.AddBuildingBlock(new(new InsertAfterFirstItemLambdaBlock<T>(predicate, sequence).ToParametrized<T, TParameters>()));
 
             return builder;
         }
@@ -155,7 +155,7 @@ namespace EnumerableToolkit.Builder
         /// <param name="sequence">A sequence of items that should be added.</param>
         public static IParametrizedEnumerableBuilder<T, TParameters> InsertBeforeEveryItem<T, TParameters>(this IParametrizedEnumerableBuilder<T, TParameters> builder, Func<T, int, bool> predicate, IEnumerable<T> sequence)
         {
-            builder.AddBuildingBlock(new InsertBeforeEveryItemLambdaBlock<T>(predicate, sequence).ToParametrized<T, TParameters>());
+            builder.AddBuildingBlock(new(new InsertBeforeEveryItemLambdaBlock<T>(predicate, sequence).ToParametrized<T, TParameters>()));
 
             return builder;
         }
@@ -205,7 +205,7 @@ namespace EnumerableToolkit.Builder
         /// <param name="sequence">A sequence of items that should be added.</param>
         public static IParametrizedEnumerableBuilder<T, TParameters> InsertBeforeFirstItem<T, TParameters>(this IParametrizedEnumerableBuilder<T, TParameters> builder, Func<T, int, bool> predicate, IEnumerable<T> sequence)
         {
-            builder.AddBuildingBlock(new InsertBeforeFirstItemLambdaBlock<T>(predicate, sequence).ToParametrized<T, TParameters>());
+            builder.AddBuildingBlock(new(new InsertBeforeFirstItemLambdaBlock<T>(predicate, sequence).ToParametrized<T, TParameters>()));
 
             return builder;
         }
@@ -253,7 +253,7 @@ namespace EnumerableToolkit.Builder
         /// <param name="predicate">A predicate determining whether the current item should be returned.</param>
         public static IParametrizedEnumerableBuilder<T, TParameters> Where<T, TParameters>(this IParametrizedEnumerableBuilder<T, TParameters> builder, Func<T, int, bool> predicate)
         {
-            builder.AddBuildingBlock(new WhereItemLambdaBlock<T>(predicate).ToParametrized<T, TParameters>());
+            builder.AddBuildingBlock(new(new WhereItemLambdaBlock<T>(predicate).ToParametrized<T, TParameters>()));
 
             return builder;
         }

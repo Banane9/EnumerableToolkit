@@ -1,7 +1,4 @@
 ﻿using EnumerableToolkit.Builder.Blocks;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EnumerableToolkit.Builder
 {
@@ -23,24 +20,24 @@ namespace EnumerableToolkit.Builder
 
         /// <summary>
         /// Adds the given <see cref="IBuildingBlock{T}">parametrized building block</see>
-        /// at the end of the application chain of this enumerable builder.
+        /// into the prioritized application chain of this enumerable builder.
         /// </summary>
         /// <param name="block">The parametrized building block to add.</param>
-        public void AddBuildingBlock(IParametrizedBuildingBlock<T, TParameters> block);
+        public void AddBuildingBlock(Prioritizable<IParametrizedBuildingBlock<T, TParameters>> block);
 
         /// <summary>
         /// Adds the given <see cref="IBuildingBlock{T}">parametrized building blocks</see>
-        /// at the end of the application chain of this enumerable builder.
+        /// into the prioritized application chain of this enumerable builder.
         /// </summary>
         /// <param name="blocks">The parametrized building blocks to add.</param>
-        public void AddBuildingBlocks(IEnumerable<IParametrizedBuildingBlock<T, TParameters>> blocks);
+        public void AddBuildingBlocks(IEnumerable<Prioritizable<IParametrizedBuildingBlock<T, TParameters>>> blocks);
 
         /// <summary>
         /// Adds the given <see cref="IBuildingBlock{T}">parametrized building blocks</see>
-        /// at the end of the application chain of this enumerable builder.
+        /// into the prioritized application chain of this enumerable builder.
         /// </summary>
         /// <param name="blocks">The parametrized building blocks to add.</param>
-        public void AddBuildingBlocks(params IParametrizedBuildingBlock<T, TParameters>[] blocks);
+        public void AddBuildingBlocks(params Prioritizable<IParametrizedBuildingBlock<T, TParameters>>[] blocks);
 
         /// <summary>
         /// Removes all <see cref="IParametrizedBuildingBlock{T, TParameters}">parametrized building blocks</see>
@@ -62,7 +59,7 @@ namespace EnumerableToolkit.Builder
         /// </summary>
         /// <param name="block">The parametrized building block to remove.</param>
         /// <returns><c>true</c> if a building block was removed; otherwise, <c>false</c>.</returns>
-        public bool RemoveBuildingBlock(IParametrizedBuildingBlock<T, TParameters> block);
+        public bool RemoveBuildingBlock(Prioritizable<IParametrizedBuildingBlock<T, TParameters>> block);
     }
 
     /// <summary>
@@ -74,21 +71,21 @@ namespace EnumerableToolkit.Builder
     /// <typeparam name="TParameters">The type of the parameters for generating a sequence.</typeparam>
     public sealed class ParametrizedEnumerableBuilder<T, TParameters> : IParametrizedEnumerableBuilder<T, TParameters>
     {
-        private readonly List<IParametrizedBuildingBlock<T, TParameters>> _buildingBlocks = [];
+        private readonly PrioritySortedCollection<Prioritizable<IParametrizedBuildingBlock<T, TParameters>>> _buildingBlocks = [];
 
         /// <inheritdoc/>
         public int Count => _buildingBlocks.Count;
 
         /// <inheritdoc/>
-        public void AddBuildingBlock(IParametrizedBuildingBlock<T, TParameters> block)
+        public void AddBuildingBlock(Prioritizable<IParametrizedBuildingBlock<T, TParameters>> block)
             => _buildingBlocks.Add(block);
 
         /// <inheritdoc/>
-        public void AddBuildingBlocks(IEnumerable<IParametrizedBuildingBlock<T, TParameters>> blocks)
+        public void AddBuildingBlocks(IEnumerable<Prioritizable<IParametrizedBuildingBlock<T, TParameters>>> blocks)
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
-        public void AddBuildingBlocks(params IParametrizedBuildingBlock<T, TParameters>[] blocks)
+        public void AddBuildingBlocks(params Prioritizable<IParametrizedBuildingBlock<T, TParameters>>[] blocks)
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
@@ -101,14 +98,14 @@ namespace EnumerableToolkit.Builder
 
             // Manual iteration rather than .Aggregate to capture
             // the internal state at call time instead of iteration time
-            foreach (var block in _buildingBlocks)
+            foreach (var block in _buildingBlocks.Unwrap())
                 block.Apply(current, parameters);
 
             return current;
         }
 
         /// <inheritdoc/>
-        public bool RemoveBuildingBlock(IParametrizedBuildingBlock<T, TParameters> block)
+        public bool RemoveBuildingBlock(Prioritizable<IParametrizedBuildingBlock<T, TParameters>> block)
             => _buildingBlocks.Remove(block);
     }
 }
