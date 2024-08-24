@@ -61,7 +61,7 @@ jobs:
       run: dotnet build --no-restore --configuration Release
     
     - name: Test
-      run: dotnet test --no-restore --no-build
+      run: dotnet test --no-restore --no-build --configuration Release
     
     - name: Move NuGet Packages
       run: mv (Get-ChildItem -Recurse ./ -Include *.nupkg) ./
