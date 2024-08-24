@@ -11,21 +11,21 @@ namespace EnumerableToolkit.Builder
     /// <typeparam name="TParameters">The type of the parameters for generating an async sequence.</typeparam>
     public sealed class AsyncParametrizedEnumerableBuilder<T, TParameters> : IAsyncParametrizedEnumerableBuilder<T, TParameters>
     {
-        private readonly List<IAsyncParametrizedBuildingBlock<T, TParameters>> _buildingBlocks = [];
+        private readonly PrioritySortedCollection<Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>>> _buildingBlocks = [];
 
         /// <inheritdoc/>
         public int Count => _buildingBlocks.Count;
 
         /// <inheritdoc/>
-        public void AddBuildingBlock(IAsyncParametrizedBuildingBlock<T, TParameters> block)
+        public void AddBuildingBlock(Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>> block)
             => _buildingBlocks.Add(block);
 
         /// <inheritdoc/>
-        public void AddBuildingBlocks(IEnumerable<IAsyncParametrizedBuildingBlock<T, TParameters>> blocks)
+        public void AddBuildingBlocks(IEnumerable<Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>>> blocks)
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
-        public void AddBuildingBlocks(params IAsyncParametrizedBuildingBlock<T, TParameters>[] blocks)
+        public void AddBuildingBlocks(params Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>>[] blocks)
             => _buildingBlocks.AddRange(blocks);
 
         /// <inheritdoc/>
@@ -38,14 +38,14 @@ namespace EnumerableToolkit.Builder
 
             // Manual iteration rather than .Aggregate to capture
             // the internal state at call time instead of iteration time
-            foreach (var block in _buildingBlocks)
+            foreach (var block in _buildingBlocks.Unwrap())
                 block.Apply(current, parameters);
 
             return current;
         }
 
         /// <inheritdoc/>
-        public bool RemoveBuildingBlock(IAsyncParametrizedBuildingBlock<T, TParameters> block)
+        public bool RemoveBuildingBlock(Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>> block)
             => _buildingBlocks.Remove(block);
     }
 
@@ -67,24 +67,24 @@ namespace EnumerableToolkit.Builder
 
         /// <summary>
         /// Adds the given <see cref="IAsyncBuildingBlock{T}">async parametrized building block</see>
-        /// at the end of the application chain of this async enumerable builder.
+        /// into the prioritized application chain of this async enumerable builder.
         /// </summary>
         /// <param name="block">The async parametrized building block to add.</param>
-        public void AddBuildingBlock(IAsyncParametrizedBuildingBlock<T, TParameters> block);
+        public void AddBuildingBlock(Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>> block);
 
         /// <summary>
         /// Adds the given <see cref="IAsyncBuildingBlock{T}">async parametrized building blocks</see>
-        /// at the end of the application chain of this async enumerable builder.
+        /// into the prioritized application chain of this async enumerable builder.
         /// </summary>
         /// <param name="blocks">The async parametrized building blocks to add.</param>
-        public void AddBuildingBlocks(IEnumerable<IAsyncParametrizedBuildingBlock<T, TParameters>> blocks);
+        public void AddBuildingBlocks(IEnumerable<Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>>> blocks);
 
         /// <summary>
         /// Adds the given <see cref="IAsyncBuildingBlock{T}">async parametrized building blocks</see>
-        /// at the end of the application chain of this async enumerable builder.
+        /// into the prioritized application chain of this async enumerable builder.
         /// </summary>
         /// <param name="blocks">The async parametrized building blocks to add.</param>
-        public void AddBuildingBlocks(params IAsyncParametrizedBuildingBlock<T, TParameters>[] blocks);
+        public void AddBuildingBlocks(params Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>>[] blocks);
 
         /// <summary>
         /// Removes all <see cref="IAsyncParametrizedBuildingBlock{T, TParameters}">async parametrized building blocks</see>
@@ -106,6 +106,6 @@ namespace EnumerableToolkit.Builder
         /// </summary>
         /// <param name="block">The async parametrized building block to remove.</param>
         /// <returns><c>true</c> if a building block was removed; otherwise, <c>false</c>.</returns>
-        public bool RemoveBuildingBlock(IAsyncParametrizedBuildingBlock<T, TParameters> block);
+        public bool RemoveBuildingBlock(Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>> block);
     }
 }

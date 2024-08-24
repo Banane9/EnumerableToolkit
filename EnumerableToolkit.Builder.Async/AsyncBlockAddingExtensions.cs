@@ -10,7 +10,7 @@ namespace EnumerableToolkit.Builder
     public static class AsyncBlockAddingExtensions
     {
         /// <summary>
-        /// Adds a building block that concatenates the given items to the end of the current constructed async enumerable sequence.
+        /// Adds a building block with default priority that concatenates the given items to the end of the current constructed async enumerable sequence.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -20,7 +20,7 @@ namespace EnumerableToolkit.Builder
             => builder.Concat(firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that concatenates the given async sequence to the end of the current constructed async enumerable sequence.
+        /// Adds a building block with default priority that concatenates the given async sequence to the end of the current constructed async enumerable sequence.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -33,7 +33,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that concatenates the given async sequence to the end of the current constructed async enumerable sequence.
+        /// Adds a building block with default priority that concatenates the given async sequence to the end of the current constructed async enumerable sequence.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -42,7 +42,7 @@ namespace EnumerableToolkit.Builder
             => builder.Concat(sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that inserts the given items after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -53,7 +53,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate, firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -67,7 +67,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -77,7 +77,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate, sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that inserts the given items after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -88,7 +88,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate.Wrap(), firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -98,7 +98,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate.Wrap(), sequence);
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -108,7 +108,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate.Wrap(), sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that inserts the given items after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -119,7 +119,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterFirstItem(predicate, firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -133,7 +133,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -143,7 +143,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterFirstItem(predicate, sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that inserts the given items after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -154,7 +154,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterFirstItem(predicate.Wrap(), firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -164,7 +164,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterFirstItem(predicate.Wrap(), sequence);
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -174,7 +174,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterFirstItem(predicate.Wrap(), sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that inserts the given items before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -185,7 +185,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeEveryItem(predicate, firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -199,7 +199,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -209,7 +209,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeEveryItem(predicate, sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that inserts the given items before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -220,7 +220,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeEveryItem(predicate.Wrap(), firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -230,7 +230,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeEveryItem(predicate.Wrap(), sequence);
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -240,7 +240,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeEveryItem(predicate.Wrap(), sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that inserts the given items before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -251,7 +251,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeFirstItem(predicate, firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -265,7 +265,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -275,7 +275,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate, sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that inserts the given items before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -286,7 +286,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeFirstItem(predicate.Wrap(), firstItem.YieldAsync().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -296,7 +296,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeFirstItem(predicate.Wrap(), sequence);
 
         /// <summary>
-        /// Adds a building block that inserts the given async sequence before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given async sequence before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -306,7 +306,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeFirstItem(predicate.Wrap(), sequence.ToAsyncEnumerable());
 
         /// <summary>
-        /// Adds a building block that filters the current async sequence based on the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that filters the current async sequence based on the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
@@ -319,7 +319,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that filters the current async sequence based on the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that filters the current async sequence based on the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated async sequence.</typeparam>
         /// <param name="builder">Theasync enumerable builder to add the building block to.</param>
