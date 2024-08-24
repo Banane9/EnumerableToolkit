@@ -9,7 +9,7 @@ namespace EnumerableToolkit.Builder
     public static class BlockAddingExtensions
     {
         /// <summary>
-        /// Adds a building block that concatenates the given items to the end of the current constructed enumerable sequence.
+        /// Adds a building block with default priority that concatenates the given items to the end of the current constructed enumerable sequence.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -19,7 +19,7 @@ namespace EnumerableToolkit.Builder
             => builder.Concat(firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that concatenates the given sequence to the end of the current constructed enumerable sequence.
+        /// Adds a building block with default priority that concatenates the given sequence to the end of the current constructed enumerable sequence.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -32,7 +32,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given items after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -43,7 +43,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate, firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given sequence after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given sequence after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -57,7 +57,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given items after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -68,7 +68,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate.Wrap(), firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given sequence after every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given sequence after every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -78,7 +78,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterEveryItem(predicate.Wrap(), sequence);
 
         /// <summary>
-        /// Adds a building block that inserts the given items after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -89,7 +89,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterFirstItem(predicate, firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given sequence after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given sequence after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -103,7 +103,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given items after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -114,7 +114,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterFirstItem(predicate.Wrap(), firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given sequence after the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given sequence after the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -124,7 +124,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertAfterFirstItem(predicate.Wrap(), sequence);
 
         /// <summary>
-        /// Adds a building block that inserts the given items before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -135,7 +135,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeEveryItem(predicate, firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given sequence before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given sequence before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -149,7 +149,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given items before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -160,7 +160,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeEveryItem(predicate.Wrap(), firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given sequence before every item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given sequence before every item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -170,7 +170,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeEveryItem(predicate.Wrap(), sequence);
 
         /// <summary>
-        /// Adds a building block that inserts the given items before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -181,7 +181,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeFirstItem(predicate, firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given sequence before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given sequence before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -195,7 +195,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that inserts the given items before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given items before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -206,7 +206,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeFirstItem(predicate.Wrap(), firstItem.Yield().Concat(following));
 
         /// <summary>
-        /// Adds a building block that inserts the given sequence before the first item that matches the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that inserts the given sequence before the first item that matches the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -216,7 +216,7 @@ namespace EnumerableToolkit.Builder
             => builder.InsertBeforeFirstItem(predicate.Wrap(), sequence);
 
         /// <summary>
-        /// Adds a building block that filters the current sequence based on the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that filters the current sequence based on the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
@@ -229,7 +229,7 @@ namespace EnumerableToolkit.Builder
         }
 
         /// <summary>
-        /// Adds a building block that filters the current sequence based on the given <paramref name="predicate"/>.
+        /// Adds a building block with default priority that filters the current sequence based on the given <paramref name="predicate"/>.
         /// </summary>
         /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
         /// <param name="builder">The enumerable builder to add the building block to.</param>
