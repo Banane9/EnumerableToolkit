@@ -37,7 +37,7 @@ namespace EnumerableToolkit.Builder
             // Manual iteration rather than .Aggregate to capture
             // the internal state at call time instead of iteration time
             foreach (var block in _buildingBlocks.Unwrap())
-                block.Apply(current);
+                current = block.Apply(current);
 
             return current;
         }

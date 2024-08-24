@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>$(AssemblyTitle)</Title>
     <Authors>Banane9</Authors>
-    <Version>2.0.1</Version>
+    <Version>2.0.2</Version>
     <Description>Adds an AsyncEnumerableBuilder to incrementally construct an async enumerable sequence out of building blocks.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/Banane9/EnumerableToolkit</PackageProjectUrl>
