@@ -52,7 +52,7 @@ namespace EnumerableToolkit
         /// Wraps the <see cref="IEnumerable{T}.GetEnumerator">enumerator</see>
         /// of the given <paramref name="enumerable"/> to only evaluate it once.
         /// </summary>
-        /// <param name="enumerable">The enumerable to enumerate.</param>
+        /// <param name="enumerable">The enumerable to iterate.</param>
         public PeekAheadEnumerator(IEnumerable<T> enumerable)
             : this(enumerable.GetEnumerator())
         { }
