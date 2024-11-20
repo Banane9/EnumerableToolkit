@@ -12,6 +12,9 @@ namespace EnumerableToolkit.Builder
         private readonly PrioritySortedCollection<Prioritizable<IBuildingBlock<T>>> _buildingBlocks = [];
 
         /// <inheritdoc/>
+        public IEnumerable<IBuildingBlock<T>> BuildingBlocks => _buildingBlocks.Unwrap();
+
+        /// <inheritdoc/>
         public int Count => _buildingBlocks.Count;
 
         /// <inheritdoc/>
@@ -55,6 +58,11 @@ namespace EnumerableToolkit.Builder
     /// <typeparam name="T">The type of the items in the generated sequence.</typeparam>
     public interface IEnumerableBuilder<T>
     {
+        /// <summary>
+        /// Gets the current application chain of this enumerable builder.
+        /// </summary>
+        public IEnumerable<IBuildingBlock<T>> BuildingBlocks { get; }
+
         /// <summary>
         /// Gets the number of <see cref="IBuildingBlock{T}">building blocks</see>
         /// that have been added to this enumerable builder.

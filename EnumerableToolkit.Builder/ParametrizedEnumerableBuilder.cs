@@ -13,7 +13,12 @@ namespace EnumerableToolkit.Builder
     public interface IParametrizedEnumerableBuilder<T, TParameters>
     {
         /// <summary>
-        /// Gets the number of <see cref="IBuildingBlock{T}">building blocks</see>
+        /// Gets the current application chain of this enumerable builder.
+        /// </summary>
+        public IEnumerable<IParametrizedBuildingBlock<T, TParameters>> BuildingBlocks { get; }
+
+        /// <summary>
+        /// Gets the number of <see cref="IParametrizedBuildingBlock{T, TParameters}">building blocks</see>
         /// that have been added to this enumerable builder.
         /// </summary>
         public int Count { get; }
@@ -72,6 +77,9 @@ namespace EnumerableToolkit.Builder
     public sealed class ParametrizedEnumerableBuilder<T, TParameters> : IParametrizedEnumerableBuilder<T, TParameters>
     {
         private readonly PrioritySortedCollection<Prioritizable<IParametrizedBuildingBlock<T, TParameters>>> _buildingBlocks = [];
+
+        /// <inheritdoc/>
+        public IEnumerable<IParametrizedBuildingBlock<T, TParameters>> BuildingBlocks => _buildingBlocks.Unwrap();
 
         /// <inheritdoc/>
         public int Count => _buildingBlocks.Count;

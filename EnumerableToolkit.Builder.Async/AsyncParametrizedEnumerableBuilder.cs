@@ -14,6 +14,9 @@ namespace EnumerableToolkit.Builder
         private readonly PrioritySortedCollection<Prioritizable<IAsyncParametrizedBuildingBlock<T, TParameters>>> _buildingBlocks = [];
 
         /// <inheritdoc/>
+        public IEnumerable<IAsyncParametrizedBuildingBlock<T, TParameters>> BuildingBlocks => _buildingBlocks.Unwrap();
+
+        /// <inheritdoc/>
         public int Count => _buildingBlocks.Count;
 
         /// <inheritdoc/>
@@ -60,7 +63,12 @@ namespace EnumerableToolkit.Builder
     public interface IAsyncParametrizedEnumerableBuilder<T, TParameters>
     {
         /// <summary>
-        /// Gets the number of <see cref="IAsyncBuildingBlock{T}">async building blocks</see>
+        /// Gets the current application chain of this async enumerable builder.
+        /// </summary>
+        public IEnumerable<IAsyncParametrizedBuildingBlock<T, TParameters>> BuildingBlocks { get; }
+
+        /// <summary>
+        /// Gets the number of <see cref="IAsyncParametrizedBuildingBlock{T, TParameters}">async building blocks</see>
         /// that have been added to this async enumerable builder.
         /// </summary>
         public int Count { get; }
