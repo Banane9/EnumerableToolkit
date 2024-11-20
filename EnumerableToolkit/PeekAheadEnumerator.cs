@@ -12,8 +12,8 @@ namespace EnumerableToolkit
     /// <remarks>
     /// This enumerator is intended for searches in a sequence
     /// that make use of branching and backtracking.
-    /// As such, <see cref="MoveToCurrentPeekPosition"/> <see cref="Reset">resetting</see> an instance of it
-    /// will break any related instances.<br/>
+    /// As such, <see cref="MoveToCurrentPeekPosition">moving to the current peek position</see>
+    /// of or <see cref="Reset">resetting</see> an instance of it will break any related instances.<br/>
     /// <br/>
     /// This class is thread safe.
     /// </remarks>
