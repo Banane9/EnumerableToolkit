@@ -10,6 +10,9 @@ namespace EnumerableToolkit
         /// <summary>
         /// Outputs all nodes that are part of cycles, given an expression that produces a set of connected nodes.
         /// </summary>
+        /// <remarks>
+        /// Note that this method requires a full evaluation of the input sequence to produce an output.
+        /// </remarks>
         /// <param name="nodes">The input nodes.</param>
         /// <param name="identifier">Gets the dependency identifier of a node.</param>
         /// <param name="connected">The expression producing connected nodes.</param>
@@ -17,7 +20,6 @@ namespace EnumerableToolkit
         /// <typeparam name="TDependency">The dependency connection type.</typeparam>
         /// <returns>All input nodes that are part of a cycle.</returns>
         public static async IAsyncEnumerable<TNode> FindCycles<TNode, TDependency>(this IAsyncEnumerable<TNode> nodes, Func<TNode, TDependency> identifier, Func<TNode, IEnumerable<TDependency>> connected)
-
             where TNode : notnull
             where TDependency : notnull
         {
@@ -27,9 +29,9 @@ namespace EnumerableToolkit
 
             while (dependencies.Count > 0)
             {
-                var key = dependencies.FirstOrDefault(x => x.Value.Count == 0).Key
+                var key = (await dependencies.ToAsyncEnumerable().FirstOrDefaultAsync(x => x.Value.Count == 0)).Key
                     ?? throw new ArgumentException($"Cyclic dependencies are not allowed!{Environment.NewLine}" +
-                    $"Sorted: {string.Join(", ", nodes.Select(identifier).ToEnumerable().Except(dependencies.Keys.Select(identifier)))}{Environment.NewLine}" +
+                    $"Sorted: {string.Join(", ", nodes.Select(identifier).Except(dependencies.Keys.Select(identifier).ToAsyncEnumerable()))}{Environment.NewLine}" +
                     $"Unsorted:{Environment.NewLine}" +
                     $"    {string.Join($"{Environment.NewLine}    ", dependencies.Select(element => $"{identifier(element.Key)}:{Environment.NewLine}        {string.Join($"{Environment.NewLine}        ", element.Value)}"))}");
 
@@ -43,26 +45,23 @@ namespace EnumerableToolkit
             }
         }
 
-        /// <summary>
-        /// Performs a topological sort of the input <paramref name="nodes"/>, given an expression that produces a set of connected nodes.
-        /// </summary>
-        /// <param name="nodes">The input nodes.</param>
-        /// <param name="connected">The expression producing connected nodes.</param>
-        /// <typeparam name="TNode">The node type.</typeparam>
-        /// <returns>The input nodes, sorted.</returns>
-        /// <exception cref="ArgumentException">Thrown if a cyclic dependency is found.</exception>
+        /// <inheritdoc cref="TopologicalSort{TNode, TDependency}(IAsyncEnumerable{TNode}, Func{TNode, TDependency}, Func{TNode, IEnumerable{TDependency}})"/>
         public static IAsyncEnumerable<TNode> TopologicalSort<TNode>(this IAsyncEnumerable<TNode> nodes, Func<TNode, IEnumerable<TNode>> connected)
-            where TNode : notnull => nodes.TopologicalSort(node => node, connected);
+                where TNode : notnull
+            => nodes.TopologicalSort(node => node, connected);
 
         /// <summary>
         /// Performs a topological sort of the input <paramref name="nodes"/>, given an expression that produces a set of connected nodes.
         /// </summary>
+        /// <remarks>
+        /// Note that this method requires a full evaluation of the input sequence to produce an output.
+        /// </remarks>
         /// <param name="nodes">The input nodes.</param>
         /// <param name="identifier">Gets the dependency identifier of a node.</param>
         /// <param name="connected">The expression producing connected nodes.</param>
         /// <typeparam name="TNode">The node type.</typeparam>
         /// <typeparam name="TDependency">The dependency connection type.</typeparam>
-        /// <returns>The input nodes, sorted .</returns>
+        /// <returns>The input nodes, sorted.</returns>
         /// <exception cref="ArgumentException">Thrown if a cyclic dependency is found.</exception>
         public static async IAsyncEnumerable<TNode> TopologicalSort<TNode, TDependency>(this IAsyncEnumerable<TNode> nodes, Func<TNode, TDependency> identifier, Func<TNode, IEnumerable<TDependency>> connected)
             where TNode : notnull
@@ -72,9 +71,9 @@ namespace EnumerableToolkit
 
             while (elements.Count > 0)
             {
-                var key = elements.FirstOrDefault(x => x.Value.Count == 0).Key
+                var key = (await elements.ToAsyncEnumerable().FirstOrDefaultAsync(x => x.Value.Count == 0)).Key
                     ?? throw new ArgumentException($"Cyclic dependencies are not allowed!{Environment.NewLine}" +
-                    $"Sorted: {string.Join(", ", nodes.Select(identifier).ToEnumerable().Except(elements.Keys.Select(identifier)))}{Environment.NewLine}" +
+                    $"Sorted: {string.Join(", ", nodes.Select(identifier).Except(elements.Keys.Select(identifier).ToAsyncEnumerable()))}{Environment.NewLine}" +
                     $"Unsorted:{Environment.NewLine}" +
                     $"    {string.Join($"{Environment.NewLine}    ", elements.Select(element => $"{identifier(element.Key)}:{Environment.NewLine}        {string.Join($"{Environment.NewLine}        ", element.Value)}"))}");
 
