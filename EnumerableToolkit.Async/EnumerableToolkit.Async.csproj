@@ -2,7 +2,7 @@
   <PropertyGroup>
     <RootNamespace>EnumerableToolkit</RootNamespace>
     <Title>$(AssemblyTitle)</Title>
-    <Version>1.2.0</Version>
+    <Version>1.4.0</Version>
     <Description>Contains helpful convenience methods to work with async enumerables.</Description>
     <PackageTags>$(PackageTags); IAsyncEnumerable; async</PackageTags>
   </PropertyGroup>

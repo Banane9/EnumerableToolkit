@@ -2,7 +2,7 @@
   <PropertyGroup>
     <RootNamespace>EnumerableToolkit.Builder</RootNamespace>
     <Title>$(AssemblyTitle)</Title>
-    <Version>2.0.2</Version>
+    <Version>2.1.0</Version>
     <Description>Adds an AsyncEnumerableBuilder to incrementally construct an async enumerable sequence out of building blocks.</Description>
     <PackageTags>$(PackageTags); IAsyncEnumerable; builder; async</PackageTags>
   </PropertyGroup>

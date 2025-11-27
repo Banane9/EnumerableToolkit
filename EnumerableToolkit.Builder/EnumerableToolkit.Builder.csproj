@@ -2,7 +2,7 @@
   <PropertyGroup>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>$(AssemblyTitle)</Title>
-    <Version>2.0.2</Version>
+    <Version>2.1.0</Version>
     <Description>Adds an EnumerableBuilder to incrementally construct an enumerable sequence out of building blocks.</Description>
     <PackageTags>$(PackageTags); builder</PackageTags>
   </PropertyGroup>
