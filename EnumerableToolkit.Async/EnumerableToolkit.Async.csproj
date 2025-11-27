@@ -1,20 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <!--<PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
-  </PropertyGroup>-->
-  
   <PropertyGroup>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RootNamespace>EnumerableToolkit</RootNamespace>
     <Title>$(AssemblyTitle)</Title>
-    <Authors>Banane9</Authors>
     <Version>1.2.0</Version>
     <Description>Contains helpful convenience methods to work with async enumerables.</Description>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageProjectUrl>https://github.com/Banane9/EnumerableToolkit</PackageProjectUrl>
-    <RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
-    <!--<PackageIconUrl></PackageIconUrl>
-    <PackageIconUrl>/Icon.png</PackageIconUrl>-->
-    <PackageTags>IEnumerable; enumerable; tool; tools; toolkit; builder; helper; linq; async</PackageTags>
+    <PackageTags>$(PackageTags); IAsyncEnumerable; async</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,12 +12,8 @@
     <!--<None Include="..\Icon.png" Pack="true" PackagePath="" /> -->
   </ItemGroup>
 
- <!-- <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
-  </ItemGroup>-->
-
   <ItemGroup>
-    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+    <PackageReference Include="System.Linq.AsyncEnumerable" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
